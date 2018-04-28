@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { Input, Button, Icon, Preloader } from 'react-materialize';
+import { fetchData } from "./fetchData";
 import UserBadge from './Userbadge';
 import './App.css';
+
+const GITHUB_API = "https://api.github.com";
 
 class Search extends Component {
     constructor(props) {
@@ -9,9 +12,9 @@ class Search extends Component {
         this.state = {
             loading: false,
             error: false,
-            message: null,
             input: "",
             userData: null,
+            userRepos: null,
         };
     }
 
@@ -20,7 +23,7 @@ class Search extends Component {
             <div>
                 <Input placeholder="Github username" onChange={(e, value) => this.handleInput(e, value)} /><Button disabled={this.state.input === ""} onClick={() => this.runSearch()}><Icon>search</Icon></Button>
                 <div>{this.state.loading && <Preloader size='small' />}</div>
-                {this.state.error && <div>Sorry, no matches found for this search :-/</div>}
+                {this.state.error && <div>Sorry, no matches found for "{this.state.input}".  Try again?</div>}
                 {this.state.userData && <UserBadge
                     name={this.state.userData.name}
                     followerCount={this.state.userData.followers}
@@ -40,25 +43,27 @@ class Search extends Component {
     runSearch = async () => {
         await this.asyncSetState({ loading: true });
         try {
-            const result = await fetch(`https://api.github.com/users/${this.state.input}`);
-            if (result.ok) {
-                const userData = await result.json();
-                console.log('data: ', userData);
-                await this.asyncSetState({
-                    loading: false,
-                    userData
-                });
-            } else {
-                this.setState({
-                    loading: false,
-                    error: true,
-                    userData: null,
-                })
-            }
+
+            const userData = await fetchData(`${GITHUB_API}/users/${this.state.input}`); // await fetch(`https://api.github.com/users/${this.state.input}`);
+            const repoData = await fetchData(`${GITHUB_API}/users/${this.state.input}/repos`);
+
+            await this.asyncSetState({
+                loading: false,
+                error: userData == null,
+                userData,
+                repoData
+            });
         } catch (error) {
             console.log('error: ', error);
-        }
 
+            await this.asyncSetState({
+                loading: false,
+                error: true,
+                userData: null,
+                repoData: null,
+                input: "",
+            });
+        }
     }
 
     asyncSetState = (newState) => new Promise((resolve) => this.setState(newState, resolve));
