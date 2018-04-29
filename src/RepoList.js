@@ -8,7 +8,7 @@ const RepoList = ({ repos }) => {
             repos.map((repo, index) => (<CollectionItem key={`${index.toString()}-${repo.id}`}>
                 <Collection>
                     <CollectionItem>Name: {repo.name}</CollectionItem>
-                    <CollectionItem>Description: {repo.description ? repo.description : "(No description found)"}</CollectionItem>
+                    <CollectionItem>Description: {repo.description ? repo.description : "No description found."}</CollectionItem>
                     <CollectionItem>Git Url: {repo.git_url}</CollectionItem>
                     <CollectionItem>Stars: {repo.stargazers_count}</CollectionItem>
                     <CollectionItem>Forks: {repo.forks_count}</CollectionItem>
@@ -17,7 +17,7 @@ const RepoList = ({ repos }) => {
                 </Collection>
             </CollectionItem>))
             :
-            <CollectionItem>No repos found <Icon>emoticon-sad</Icon></CollectionItem>
+            <CollectionItem>No repos found.</CollectionItem>
         }</Collection>
     );
 }
