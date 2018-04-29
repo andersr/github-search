@@ -1,5 +1,5 @@
 import React from 'react';
-import { Icon, Collection, CollectionItem } from 'react-materialize';
+import { Collection, CollectionItem } from 'react-materialize';
 import pretty from 'prettysize';
 
 const RepoList = ({ repos }) => {

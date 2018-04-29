@@ -1,5 +1,5 @@
 import React from 'react';
-import { Col, Card, CardTitle, CardPanel, Collection, CollectionItem } from 'react-materialize';
+import { Card, CardTitle, Collection, CollectionItem } from 'react-materialize';
 
 const UserBadge = ({ userData }) => {
     return (<Card

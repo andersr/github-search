@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Input, Button, Icon, Preloader } from 'react-materialize';
+import { Input, Button, Icon } from 'react-materialize';
 import { fetchData } from "./utils/fetchData";
 import UserBadge from './Userbadge';
 import RepoList from './RepoList';

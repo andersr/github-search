@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Navbar, NavItem, Icon } from 'react-materialize';
+import { Navbar } from 'react-materialize';
 
 class Header extends Component {
     render() {
