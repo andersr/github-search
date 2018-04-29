@@ -1,5 +1,6 @@
 import React from 'react';
 import { Icon, Collection, CollectionItem } from 'react-materialize';
+import pretty from 'prettysize';
 
 const RepoList = ({ repos }) => {
     return (
@@ -12,7 +13,7 @@ const RepoList = ({ repos }) => {
                     <CollectionItem>Stars: {repo.stargazers_count}</CollectionItem>
                     <CollectionItem>Forks: {repo.forks_count}</CollectionItem>
                     <CollectionItem>Open Issues: {repo.open_issues}</CollectionItem>
-                    <CollectionItem>Size: {repo.size} kb</CollectionItem>
+                    <CollectionItem>Size: {pretty(repo.size)}</CollectionItem>
                 </Collection>
             </CollectionItem>))
             :
