@@ -9,5 +9,4 @@ export const fetchData = async (url) => {
         console.log('error: ', error);
     }
     return data;
-
 }

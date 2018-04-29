@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Input, Button, Icon, Preloader } from 'react-materialize';
-import { fetchData } from "./fetchData";
+import { fetchData } from "./utils/fetchData";
 import UserBadge from './Userbadge';
 import RepoList from './RepoList';
 import Loading from "./Loading";
@@ -56,7 +56,7 @@ class Search extends Component {
         try {
             const input = this.state.input;
             const userData = await fetchData(`${GITHUB_API}/users/${this.state.input}`); // await fetch(`https://api.github.com/users/${this.state.input}`);
-            // console.log('userData: ', userData);
+            console.log('userData: ', userData);
             const repoData = await fetchData(`${GITHUB_API}/users/${this.state.input}/repos`);
             console.log('repoData: ', repoData);
 
