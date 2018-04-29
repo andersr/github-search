@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Input, Button, Icon, Preloader } from 'react-materialize';
 import { fetchData } from "./fetchData";
 import UserBadge from './Userbadge';
+import RepoList from './RepoList';
 import './App.css';
 
 const GITHUB_API = "https://api.github.com";
@@ -14,7 +15,7 @@ class Search extends Component {
             error: false,
             input: "",
             userData: null,
-            userRepos: null,
+            repoData: null,
         };
     }
 
@@ -28,6 +29,8 @@ class Search extends Component {
                     name={this.state.userData.name}
                     followerCount={this.state.userData.followers}
                     followingCount={this.state.userData.following}
+                />}
+                {this.state.repoData && <RepoList repos={this.state.repoData}
                 />}
             </div>
         );
@@ -46,6 +49,7 @@ class Search extends Component {
 
             const userData = await fetchData(`${GITHUB_API}/users/${this.state.input}`); // await fetch(`https://api.github.com/users/${this.state.input}`);
             const repoData = await fetchData(`${GITHUB_API}/users/${this.state.input}/repos`);
+            console.log('repoData: ', repoData);
 
             await this.asyncSetState({
                 loading: false,
