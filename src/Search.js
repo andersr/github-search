@@ -29,10 +29,7 @@ class Search extends Component {
             </form>
             {this.state.loading && <Loading />}
             {this.state.error != null && <div>Sorry, no matches found for "{this.state.error}".  Try again?</div>}
-            {this.state.userData && <UserBadge
-                name={this.state.userData.name}
-                followerCount={this.state.userData.followers}
-                followingCount={this.state.userData.following}
+            {this.state.userData && <UserBadge userData={this.state.userData}
             />}
             {this.state.repoData && <RepoList repos={this.state.repoData}
             />}
@@ -59,7 +56,9 @@ class Search extends Component {
         try {
             const input = this.state.input;
             const userData = await fetchData(`${GITHUB_API}/users/${this.state.input}`); // await fetch(`https://api.github.com/users/${this.state.input}`);
+            // console.log('userData: ', userData);
             const repoData = await fetchData(`${GITHUB_API}/users/${this.state.input}/repos`);
+            console.log('repoData: ', repoData);
 
             await this.asyncSetState({
                 loading: false,

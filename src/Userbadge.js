@@ -1,12 +1,19 @@
 import React from 'react';
-import { Collection, CollectionItem } from 'react-materialize';
+import { Col, Card, CardTitle, CardPanel, Collection, CollectionItem } from 'react-materialize';
 
-const UserBadge = ({ name, followerCount, followingCount }) => {
-    return (
-        <Collection header={name}>
-            <CollectionItem>Followers: {followerCount}</CollectionItem>
-            <CollectionItem>Following: {followingCount}</CollectionItem>
-        </Collection>
+const UserBadge = ({ userData }) => {
+    return (<Card
+    >
+        <div className={"flex-row"}><CardTitle style={{ width: 200 }} image={userData.avatar_url} />
+            <div style={{ flex: 1 }}> <Collection>
+                <CollectionItem>Name: {userData.name ? userData.name : "No name found"}</CollectionItem>
+                <CollectionItem>Followers: {userData.followers}</CollectionItem>
+                <CollectionItem>Following: {userData.following}</CollectionItem>
+            </Collection></div>
+        </div>
+
+
+    </Card>
     );
 }
 
