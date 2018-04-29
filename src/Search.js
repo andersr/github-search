@@ -34,7 +34,6 @@ class Search extends Component {
             {this.state.repoData && <RepoList repos={this.state.repoData}
             />}
         </div>
-
         );
     }
 
@@ -55,10 +54,8 @@ class Search extends Component {
         await this.asyncSetState({ loading: true });
         try {
             const input = this.state.input;
-            const userData = await fetchData(`${GITHUB_API}/users/${this.state.input}`); // await fetch(`https://api.github.com/users/${this.state.input}`);
-            console.log('userData: ', userData);
+            const userData = await fetchData(`${GITHUB_API}/users/${this.state.input}`);
             const repoData = await fetchData(`${GITHUB_API}/users/${this.state.input}/repos`);
-            console.log('repoData: ', repoData);
 
             await this.asyncSetState({
                 loading: false,
