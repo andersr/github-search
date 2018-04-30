@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { Input, Button, Icon } from 'react-materialize';
 import { fetchData } from "./utils/fetchData";
 import UserBadge from './Userbadge';
 import RepoList from './RepoList';
 import Loading from "./Loading";
 import './App.css';
+import SearchForm from './SearchForm';
+
 
 const GITHUB_API = "https://api.github.com";
 
@@ -22,11 +23,13 @@ class Search extends Component {
 
     render() {
         return (<div>
-            <form className={"flex-row"} onSubmit={(e) => this.handleSubmit(e)}>
-                <div style={{ flex: 1, marginRight: 10 }}>
-                    <Input placeholder="Github username" value={this.state.input} onChange={(e, value) => this.handleInput(e, value)} /></div>
-                <Button disabled={this.state.input === ""} onClick={() => this.runSearch()}><Icon>search</Icon></Button>
-            </form>
+            <SearchForm
+                placeholder={"Github username"}
+                onSubmit={(e) => this.handleSubmit(e)}
+                input={this.state.input}
+                onChange={(e, value) => this.handleInput(e, value)}
+                onClick={() => this.runSearch()}
+            />
             {this.state.loading && <Loading />}
             {this.state.error != null && <div>Sorry, no matches found for "{this.state.error}".  Try again?</div>}
             {this.state.userData && <UserBadge userData={this.state.userData}
